@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Security.Permissions;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
+    [SerializeField] private float rotationSpeed;
 
     private void Update()
     {
@@ -39,5 +41,8 @@ public class Player : MonoBehaviour
 
         // moves the player position
         transform.position += moveSpeed * Time.deltaTime * moveDirection;
+
+        // rotates the character to face the direction of movement
+        transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
     }
 }
