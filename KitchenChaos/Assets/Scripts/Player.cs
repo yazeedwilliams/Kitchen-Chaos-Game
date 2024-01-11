@@ -31,10 +31,13 @@ public class Player : MonoBehaviour
             inputVector.x += 1;
         }
 
+        // keeps the movement speed the same when pressing two directions at once (diagonal movement) as when pressing one direction
         inputVector = inputVector.normalized;
 
+        // uses the inputs from the user and converts it into a vector3 since the transform is vector3
         Vector3 moveDirection = new(inputVector.x, 0f, inputVector.y);
 
+        // moves the player position
         transform.position += moveSpeed * Time.deltaTime * moveDirection;
     }
 }
