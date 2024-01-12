@@ -11,32 +11,11 @@ public class Player : MonoBehaviour
 
     private bool isWalking;
 
+    [SerializeField] private GameInput gameInput;
+
     private void Update()
     {
-        Vector2 inputVector = new(0, 0);
-
-        if (Input.GetKey(KeyCode.W))
-        {
-            inputVector.y = +1;
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            inputVector.x -= 1;
-        }
-
-        if (Input.GetKey(KeyCode.S))
-        {
-            inputVector.y -= 1;
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            inputVector.x += 1;
-        }
-
-        // keeps the movement speed the same when pressing two directions at once (diagonal movement) as when pressing one direction
-        inputVector = inputVector.normalized;
+        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
 
         // uses the inputs from the user and converts it into a vector3 since the transform is vector3
         Vector3 moveDirection = new(inputVector.x, 0f, inputVector.y);
