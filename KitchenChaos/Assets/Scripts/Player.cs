@@ -14,7 +14,37 @@ public class Player : MonoBehaviour
 
     private bool isWalking;
     private Vector3 lastInteractDirection;
-    
+
+    private void Start()
+    {
+        // Listen for an event from the GameInput Class
+        gameInput.OnInteractAction += GameInput_OnInteractAction;
+    }
+
+    private void GameInput_OnInteractAction(object sender, System.EventArgs e)
+    {
+        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+
+        // uses the inputs from the user and converts it into a vector3 since the transform is vector3
+        Vector3 moveDirection = new(inputVector.x, 0f, inputVector.y);
+
+        if (moveDirection != Vector3.zero)
+        {
+            lastInteractDirection = moveDirection;
+        }
+
+        float interactDistance = 2f;
+
+        // returns the transform of the rigid body that the raycast hit
+        if (Physics.Raycast(transform.position, lastInteractDirection, out RaycastHit raycastHit, interactDistance, countersLayerMask))
+        {
+            // if the object has a clear counter component
+            if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter))
+            {
+                clearCounter.Interact();
+            }
+        }
+    }
 
     private void Update()
     {
@@ -47,7 +77,7 @@ public class Player : MonoBehaviour
             // if the object has a clear counter component
             if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter))
             {
-                clearCounter.Interact();
+                //clearCounter.Interact();
             }
         } 
     }
