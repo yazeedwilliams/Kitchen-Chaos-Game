@@ -9,12 +9,49 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotationSpeed;
+    [SerializeField] private GameInput gameInput;
+    [SerializeField] private LayerMask countersLayerMask;
 
     private bool isWalking;
-
-    [SerializeField] private GameInput gameInput;
+    private Vector3 lastInteractDirection;
+    
 
     private void Update()
+    {
+        HandleMovement();
+        HandleInteractions();
+    }
+
+    public bool IsWalking()
+    {
+        return isWalking;
+    }
+
+    private void HandleInteractions()
+    {
+        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+
+        // uses the inputs from the user and converts it into a vector3 since the transform is vector3
+        Vector3 moveDirection = new(inputVector.x, 0f, inputVector.y);
+
+        if (moveDirection != Vector3.zero)
+        {
+            lastInteractDirection = moveDirection;
+        }
+
+        float interactDistance = 2f;
+
+        // returns the transform of the rigid body that the raycast hit
+        if (Physics.Raycast(transform.position, lastInteractDirection, out RaycastHit raycastHit, interactDistance, countersLayerMask))
+        {
+            // if the object has a clear counter component
+            if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter))
+            {
+                clearCounter.Interact();
+            }
+        } 
+    }
+    private void HandleMovement()
     {
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
 
@@ -62,16 +99,11 @@ public class Player : MonoBehaviour
             // moves the player position
             transform.position += moveDistance * moveDirection;
         }
-       
+
         // rotates the character to face the direction of movement
         transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
 
         // the character is walking when the position is not zero
         isWalking = moveDirection != Vector3.zero;
-    }
-
-    public bool IsWalking()
-    {
-        return isWalking;
     }
 }
