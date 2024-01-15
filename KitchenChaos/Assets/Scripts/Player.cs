@@ -16,6 +16,16 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        HandleMovement();
+    }
+
+    public bool IsWalking()
+    {
+        return isWalking;
+    }
+
+    private void HandleMovement()
+    {
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
 
         // uses the inputs from the user and converts it into a vector3 since the transform is vector3
@@ -62,16 +72,11 @@ public class Player : MonoBehaviour
             // moves the player position
             transform.position += moveDistance * moveDirection;
         }
-       
+
         // rotates the character to face the direction of movement
         transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
 
         // the character is walking when the position is not zero
         isWalking = moveDirection != Vector3.zero;
-    }
-
-    public bool IsWalking()
-    {
-        return isWalking;
     }
 }
