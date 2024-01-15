@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private GameInput gameInput;
+    [SerializeField] private LayerMask countersLayerMask;
 
     private bool isWalking;
     private Vector3 lastInteractDirection;
@@ -41,14 +42,14 @@ public class Player : MonoBehaviour
         float interactDistance = 2f;
 
         // returns the transform of the rigid body that the raycast hit
-        if (Physics.Raycast(transform.position, lastInteractDirection, out RaycastHit raycastHit, interactDistance))
+        if (Physics.Raycast(transform.position, lastInteractDirection, out RaycastHit raycastHit, interactDistance, countersLayerMask))
         {
-            Debug.Log(raycastHit.transform);
-        }
-        else
-        {
-            Debug.Log("-");
-        }
+            // if the object has a clear counter component
+            if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter))
+            {
+                clearCounter.Interact();
+            }
+        } 
     }
     private void HandleMovement()
     {
