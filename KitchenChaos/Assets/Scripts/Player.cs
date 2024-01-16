@@ -84,19 +84,19 @@ public class Player : MonoBehaviour
                 // check if the counter in front is different from the currently selected
                 if (clearCounter != selectedCounter)
                 { 
-                    SetSelectedCounter(selectedCounter);
+                    SetSelectedCounter(clearCounter);
                 }
             }
             // if there is something but does not have the selected counter then null
             else
             {
-                SetSelectedCounter(selectedCounter);
+                SetSelectedCounter(null);
             }
         }
         // if the raycast hits nothing set the selected counter back to null
         else
         {
-            SetSelectedCounter(selectedCounter);
+            SetSelectedCounter(null);
         }
 
     }
