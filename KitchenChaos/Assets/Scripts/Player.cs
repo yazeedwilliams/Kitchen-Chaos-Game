@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -7,6 +8,15 @@ using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
+    public static Player Instance { get; private set; }
+
+    public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
+    // extend event to pass in more data
+    public class OnSelectedCounterChangedEventArgs : EventArgs
+    {
+        public ClearCounter selectedCounter;
+    }
+
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private GameInput gameInput;
@@ -14,7 +24,31 @@ public class Player : MonoBehaviour
 
     private bool isWalking;
     private Vector3 lastInteractDirection;
-    
+    private ClearCounter selectedCounter;
+
+    private void Awake()
+    {
+        // check if there is already an instance (there should only ever be one in this game)
+        if (Instance != null )
+        {
+            Debug.LogError("There is more than one Player instance");
+        }
+        Instance = this;
+    }
+
+    private void Start()
+    {
+        // Listen for an event from the GameInput Class
+        gameInput.OnInteractAction += GameInput_OnInteractAction;
+    }
+
+    private void GameInput_OnInteractAction(object sender, System.EventArgs e)
+    {
+        if (selectedCounter != null)
+        {
+            selectedCounter.Interact();
+        }
+    }
 
     private void Update()
     {
@@ -47,9 +81,24 @@ public class Player : MonoBehaviour
             // if the object has a clear counter component
             if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter))
             {
-                clearCounter.Interact();
+                // check if the counter in front is different from the currently selected
+                if (clearCounter != selectedCounter)
+                { 
+                    SetSelectedCounter(clearCounter);
+                }
             }
-        } 
+            // if there is something but does not have the selected counter then null
+            else
+            {
+                SetSelectedCounter(null);
+            }
+        }
+        // if the raycast hits nothing set the selected counter back to null
+        else
+        {
+            SetSelectedCounter(null);
+        }
+
     }
     private void HandleMovement()
     {
@@ -105,5 +154,13 @@ public class Player : MonoBehaviour
 
         // the character is walking when the position is not zero
         isWalking = moveDirection != Vector3.zero;
+    }
+
+    // method to fire off event
+    private void SetSelectedCounter(ClearCounter selectedCounter)
+    {
+        this.selectedCounter = selectedCounter;
+
+        OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs { selectedCounter = selectedCounter });
     }
 }
