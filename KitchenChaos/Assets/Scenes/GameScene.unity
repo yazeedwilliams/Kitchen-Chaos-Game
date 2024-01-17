@@ -805,6 +805,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1044342837}
+--- !u!114 &1588079040 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9155637964824702979, guid: f6457ea1af406fa479116ac90ecbf247,
+    type: 3}
+  m_PrefabInstance: {fileID: 1105735483}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aa4689c50c08ab4b8b169c3235cc3ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6821561483454621391
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -875,10 +887,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9155637964824702979, guid: f6457ea1af406fa479116ac90ecbf247,
         type: 3}
+      propertyPath: testing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155637964824702979, guid: f6457ea1af406fa479116ac90ecbf247,
+        type: 3}
       propertyPath: kitchenObjectSO
       value: 
       objectReference: {fileID: 11400000, guid: 80292c9ca493f6a429c63fea0c28791e,
         type: 2}
+    - target: {fileID: 9155637964824702979, guid: f6457ea1af406fa479116ac90ecbf247,
+        type: 3}
+      propertyPath: secondClearCounter
+      value: 
+      objectReference: {fileID: 1588079040}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
