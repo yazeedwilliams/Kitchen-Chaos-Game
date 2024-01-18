@@ -12,8 +12,9 @@ public class ContainerCounter : BaseCounter
     public override void Interact(Player player)
     {
         // clear counter knows if there is an object on it
-        if (!HasKitchenObject())
+        if (!player.HasKitchenObject())
         {
+            // if player is not carrying anything
             Transform kitchenObjectTransform = Instantiate(this.kitchenObjectSO.prefab);
             kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(player);
 

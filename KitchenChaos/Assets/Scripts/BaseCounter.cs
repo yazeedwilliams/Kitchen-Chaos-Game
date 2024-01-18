@@ -32,4 +32,9 @@ public class BaseCounter : MonoBehaviour, IKitchenObjectParent
     {
         return kitchenObject != null;
     }
+
+    public KitchenObject GetKitchenObject()
+    {
+        return kitchenObject;
+    }
 }
