@@ -66,7 +66,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4589716710238282922, guid: e21b499d164095947b7559f0267f0e63,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1882534960533447254}
   m_SourcePrefab: {fileID: 100100000, guid: e21b499d164095947b7559f0267f0e63, type: 3}
 --- !u!4 &917499118532571652 stripped
 Transform:
@@ -74,6 +78,28 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3677874716488717999}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &917499118532571653 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4589716710238282922, guid: e21b499d164095947b7559f0267f0e63,
+    type: 3}
+  m_PrefabInstance: {fileID: 3677874716488717999}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1882534960533447254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917499118532571653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f4cd209fb4e88b459044f777d8c54c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  platesCounter: {fileID: 3952400146892818917}
+  counterTopPoint: {fileID: 6017550242610850652}
+  plateVisualPrefab: {fileID: 3812876574508226176, guid: c0c9afd619b40914a8f625c0535e2284,
+    type: 3}
 --- !u!1001 &5496569402754398735
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -176,6 +202,7 @@ MonoBehaviour:
   plateKitchenObjectSO: {fileID: 11400000, guid: 601903a8e7708374db4bfe5c255465b0,
     type: 2}
   spawnPlateTimerMax: 4
+  plateSpawnedAmountMax: 4
 --- !u!4 &4210224681798321518 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8514624322480848737, guid: 693b06d60450dc34c8569b9ef695b735,
