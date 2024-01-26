@@ -42,7 +42,7 @@ public class ClearCounter : BaseCounter
                         // Counter is holding a plate
                         if (plateKitchenObject.TryAddIngredient(player.GetKitchenObject().GetKitchenObjectSO()))
                         {
-                            player.GetKitchenObject().DestroySelf();
+                            player.GetKitchenObject().DestroySelf(); 
                         }
                     }
                 }
