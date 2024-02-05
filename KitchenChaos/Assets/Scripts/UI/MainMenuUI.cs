@@ -13,5 +13,7 @@ public class MainMenuUI : MonoBehaviour
     {
         playButton.onClick.AddListener(() => Loader.Load(Loader.Scene.GameScene));
         quitButton.onClick.AddListener(() => Application.Quit());
+
+        Time.timeScale = 1f;
     }
 }
