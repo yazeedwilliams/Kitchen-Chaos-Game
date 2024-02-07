@@ -23,7 +23,7 @@ public class GameManger : MonoBehaviour
     private float waitingToStartTimer = 1f;
     private float countdownToStartTimer = 3f;
     private float gamePlayingTimer;
-    private float gamePlayingTimerMax = 10f;
+    private float gamePlayingTimerMax = 30f;
     private bool isGamePaused = false;
 
     private void Awake()
@@ -74,8 +74,6 @@ public class GameManger : MonoBehaviour
             case State.GameOver:
                 break;
         }
-        Debug.Log(state);
-
     }
 
     public bool IsGamePlaying()
