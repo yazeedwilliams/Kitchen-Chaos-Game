@@ -12,7 +12,7 @@ public class GamePausedUI : MonoBehaviour
     private void Awake()
     {
         resumeButton.onClick.AddListener(() => { 
-            GameManger.Instance.TogglePauseGame(); 
+            GameManager.Instance.TogglePauseGame(); 
         });
         mainMenuButton.onClick.AddListener(() => { 
             Loader.Load(Loader.Scene.MainMenuScene); 
@@ -25,8 +25,8 @@ public class GamePausedUI : MonoBehaviour
 
     private void Start()
     {
-        GameManger.Instance.OnGamePaused += GameManager_OnGamePaused;
-        GameManger.Instance.OnGameUnpaused += GameManager_OnGameUnpaused;
+        GameManager.Instance.OnGamePaused += GameManager_OnGamePaused;
+        GameManager.Instance.OnGameUnpaused += GameManager_OnGameUnpaused;
 
         Hide();
     }
