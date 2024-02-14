@@ -9,12 +9,12 @@ public class GameOverUI : MonoBehaviour
 
     private void Start()
     {
-        GameManger.Instance.OnStateChanged += GameManager_OnStateChanged;
+        GameManager.Instance.OnStateChanged += GameManager_OnStateChanged;
     }
 
     private void GameManager_OnStateChanged(object sender, System.EventArgs e)
     {
-        if (GameManger.Instance.IsGameOver())
+        if (GameManager.Instance.IsGameOver())
         {
             Show();
 

@@ -70,7 +70,7 @@ public class OptionsUI : MonoBehaviour
 
     private void Start()
     {
-        GameManger.Instance.OnGameUnpaused += GameManager_OnGameUnpaused;
+        GameManager.Instance.OnGameUnpaused += GameManager_OnGameUnpaused;
         UpdateVisual();
 
         HidePressToRebindKey();
